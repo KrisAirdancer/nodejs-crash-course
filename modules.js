@@ -16,5 +16,3 @@ console.log(people, ages);
 const os = require('os'); // Importing the os module that is already built into NodeJS that contains information about our machine's operating system.
 
 console.log(os.platform(), os.homedir());
-
-const fs = require('fs');
