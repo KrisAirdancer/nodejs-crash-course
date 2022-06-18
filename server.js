@@ -5,6 +5,7 @@
 // This file does not have to be called 'server.js' - it can be anything we want.
 
 const http = require('http');
+const fs = require('fs');
 
 // This creates a server (and server object) AND stores it in a variable so it can be accessed if we need.
 // const server = http.createServer();
@@ -15,20 +16,18 @@ const server = http.createServer( (req, res) => { // req = request (incomming me
     // console.log(req); // This returns the entire request object contents.
     console.log(req.url, req.method); // If you type just 'req', the entire request will be printed. No need to call toString
 
-    // The following are the slopy way to send text. Use a .html file instead.
-
-    // Headers are used by the browser to determine what kind of information it is recieving. Such as data type (JSON, HTML, etc.) or setting cookies.
-    // Set header content type
-    // res.setHeader('Content-Type', 'text/plain'); // Sending plain text to the browser.
-    // res.write("Hello world!"); // This sends information back to the browser.
-    
+    // Send HTML file
     res.setHeader('Content-Type', 'text/html');
-    // The browser will automatically add header html tags to the site if we don't. But we did, so it won't.
-    res.write('<head><link rel="styleseet" href="#"></head>')
-    res.write('<p>Hello world!</p>');
-    res.write('<p>Hello slime mold!</p>');
-
-    res.end(); // Ends the response and sends the information to the browser. This is the step that sends the data.
+    fs.readFile('./views/index.html', (err, data) => { // This reads the file and fires a callback that either returns an error or the information read from the file.
+        if (err) {
+            console.log(err.message);
+            res.end(); // If you don't kill the request here, the request will be left hanging.
+        } else {
+            res.write(data); // Sends the data to the browser.
+            res.end();
+            // res.end(data); // This is a shorthand if you are sending only a single thing. The .end function can do it.
+        }
+    });
 });
 
 // This tells the server to listen on the specified port at the specified address.
