@@ -18,7 +18,23 @@ const server = http.createServer( (req, res) => { // req = request (incomming me
 
     // Send HTML file
     res.setHeader('Content-Type', 'text/html');
-    fs.readFile('./views/index.html', (err, data) => { // This reads the file and fires a callback that either returns an error or the information read from the file.
+
+    // This determines which URL the user went to and builds a directory path to the file that should be returned based on the page the requested. This path is used below to send the correct HTML page.
+    let path = './views/'; // This just allows us to not have to type this part of the path over and over again below.
+    switch (req.url) {
+        case '/':
+            path += 'index.html';
+            break;
+        case '/about':
+            path += 'about.html';
+            break;
+        default:
+            path += '404.html';
+            break;
+    }
+
+    // The path is determined by the switch statement above
+    fs.readFile(path, (err, data) => { // This reads the file and fires a callback that either returns an error or the information read from the file.
         if (err) {
             console.log(err.message);
             res.end(); // If you don't kill the request here, the request will be left hanging.
