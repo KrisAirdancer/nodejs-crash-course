@@ -30,6 +30,10 @@ const server = http.createServer( (req, res) => { // req = request (incomming me
             path += 'about.html';
             res.statusCode = 200;
             break;
+        case '/about-me': // This is a redirect from the URL about-me to about. Such as if we originally had the about page named about-me but later changed it to about.
+            res.setHeader('Location', '/about'); // This does the redirect. It changes the URL that the user sees in their browser and directs them to the about page instead of the non-extant about-me page.
+            res.statusCode = 301; // 301 code says the resource has been permenately moved
+            break;
         default:
             path += '404.html';
             res.statusCode = 404;
