@@ -6,15 +6,13 @@
 
 const http = require('http');
 const fs = require('fs');
+const lo = require('lodash');
 
 // This creates a server (and server object) AND stores it in a variable so it can be accessed if we need.
 // const server = http.createServer();
 
 // This runs every time a request is made of the server by the browser. The callback fires every time this method is called, therefore, it fires every time the browser sends a message to the server.
 const server = http.createServer( (req, res) => { // req = request (incomming messages from browser), res = response (outgoing messages written and sent by us)
-    console.log('request made');
-    // console.log(req); // This returns the entire request object contents.
-    console.log(req.url, req.method); // If you type just 'req', the entire request will be printed. No need to call toString
 
     // Send HTML file
     res.setHeader('Content-Type', 'text/html');

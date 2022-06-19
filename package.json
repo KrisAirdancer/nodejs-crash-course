@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-crash-course",
+  "version": "1.0.0",
+  "description": "My code from following The Net Ninja's YouTube tutorial on Node.js: https://www.youtube.com/watch?v=zb3Qk8SG5Ms&amp;list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU&amp;index=1",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrisAirdancer/nodejs-crash-course.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KrisAirdancer/nodejs-crash-course/issues"
+  },
+  "homepage": "https://github.com/KrisAirdancer/nodejs-crash-course#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
