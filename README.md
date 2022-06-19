@@ -12,3 +12,6 @@ My code from following The Net Ninja's YouTube tutorial on Node.js: https://www.
     - The package.json file makes sharing the project easier.
         - The node_modules file could be huge b/c of many dependencies. The package.json file allows us to specify the required dependencies so we can share only the project code, and not the node_modules folder with all of the dependency code, which saves bandwidth and cloud storage space when sharing the project.
         - If we download a project, we can run the 'npm install' command and it will parse the packages.json file and install all of the specified dependencies for us.
+    - View engines are used to add dynamic content to webpages.
+        - We can use HTML syntax, but include variables that get filled from something like a database before sending the HTML to the browser.
+        - Some options for view engines inclue Express Handlebars, Pug, or EJS (the one we are using in this tutorial).
