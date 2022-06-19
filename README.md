@@ -1,6 +1,12 @@
 # nodejs-crash-course
 My code from following The Net Ninja's YouTube tutorial on Node.js: https://www.youtube.com/watch?v=zb3Qk8SG5Ms&amp;list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU&amp;index=1
 
+**Setting up this project**
+
+- 1. Clone the repository to local.
+- 2. Run 'npm install' in the terminal to download all of the requried dependencies.
+    - The required dependencies are listed in the projects.json file and will be downloaded by this command.
+
 
 **Notes**
 
@@ -15,3 +21,16 @@ My code from following The Net Ninja's YouTube tutorial on Node.js: https://www.
 - View engines are used to add dynamic content to webpages.
     - We can use HTML syntax, but include variables that get filled from something like a database before sending the HTML to the browser.
     - Some options for view engines inclue Express Handlebars, Pug, or EJS (the one we are using in this tutorial).
+- Middleware
+    - Code that runs on the server between the server receiving a request and sending a response is middleware.
+        - ex. Server gets a request > middleware runs to do something > server sends a response
+    - Middleware is generally run using the .use() function.
+    - We can have many different middleware running.
+    - ex. The .get() function is middleware.
+    - Middleware runs top to bottom in the code and will keep running unitl it completes or we tell it to stop.
+    - Middleware can be used for...
+        - Logging
+        - Authentication
+        - Parsing JSON requests
+        - Returning 404 pages
+        - And much, much more!

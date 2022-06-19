@@ -9,6 +9,7 @@
  */
 
 const express = require('express');
+const morgan = require('morgan');
 
 // Setting up the Express app object
 const app = express(); // Initialize the Express app object. Not an instance of this file (app.js).
@@ -20,6 +21,15 @@ app.set('view engine', 'ejs');
 
 // Listen for incoming messages
 app.listen(3000); // Listen on port 3000. This returs an instance of the server so we could save it and work with it.
+
+// Creating some middleware for logging information to the console
+app.use( (req, res, next) => {
+    console.log('new request made:');
+    console.log('host:', req.hostname);
+    console.log('path:', req.path);
+    console.log('method:', req.method);
+    next(); // If we don't call next, the program will get stuck here and not proceed. Note that we made 'next' a parameter in the callback.
+});
 
 // Listen for GET requests for the root of the domain ('/').
 app.get('/', (req, res) => {
