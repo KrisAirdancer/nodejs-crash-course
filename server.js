@@ -24,15 +24,19 @@ const server = http.createServer( (req, res) => { // req = request (incomming me
     switch (req.url) {
         case '/':
             path += 'index.html';
+            res.statusCode = 200; // Setting the status code that gets sent with the response with the response.
             break;
         case '/about':
             path += 'about.html';
+            res.statusCode = 200;
             break;
         default:
             path += '404.html';
+            res.statusCode = 404;
             break;
     }
 
+    // Sending the HTML file
     // The path is determined by the switch statement above
     fs.readFile(path, (err, data) => { // This reads the file and fires a callback that either returns an error or the information read from the file.
         if (err) {
