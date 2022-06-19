@@ -6,6 +6,9 @@ My code from following The Net Ninja's YouTube tutorial on Node.js: https://www.
 - 1. Clone the repository to local.
 - 2. Run 'npm install' in the terminal to download all of the requried dependencies.
     - The required dependencies are listed in the projects.json file and will be downloaded by this command.
+- 3. The project can now be run using either,
+    - 'nodemon app' to run using Nodemon
+    - 'node app' to run using vanilla Node.js
 
 
 **Notes**

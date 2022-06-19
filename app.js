@@ -18,7 +18,7 @@ const app = express(); // Initialize the Express app object. Not an instance of 
 
 // Connect to MongoDB
 // We only begin listening for incoming requests from the browser if we successfuly establish a connection with the database. If we haven't connected to the database, we won't be able to return any data to the browser, so there is no point in connecting.
-const dbURI = `mongodb+srv://KrisAirdancer:${process.env.MONGODB_ATLAS_PASSWORD}@nodejs-cluster.tp6w6.mongodb.net/?retryWrites=true&w=majority`;
+const dbURI = `mongodb+srv://${process.env.MONGODB_ATLAS_USER}:${process.env.MONGODB_ATLAS_PWD}@nodejs-cluster.tp6w6.mongodb.net/?retryWrites=true&w=majority`;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }) // This establishes a connection asynchronously to the database using the database connection string. The passed options are optional. We don't need them to establish a connection.
     .then( (result) => { app.listen(3000) }) // When the Promise is returned, this callback is fired. It is not required to add this, but we can use it to confirm that a connection was established.
     .catch( (err) => { console.log(err.message)}); // This function is for catching errors if they occur
