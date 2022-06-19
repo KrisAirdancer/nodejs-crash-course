@@ -34,3 +34,24 @@ My code from following The Net Ninja's YouTube tutorial on Node.js: https://www.
         - Parsing JSON requests
         - Returning 404 pages
         - And much, much more!
+- MongoDB
+    - A NoSQL database.
+    - Collections
+        - Like tables in SQL databases.
+        - Store a specific type of data.
+        - Contain only one kind of data.
+        - Can make more than one collection.
+    - Documents
+        - The data stored by collections.
+        - Store key-value pairs (This is the actual data. The document is just the container for the data.)
+    - Collections are containers collections of (containers for) Documents and Documents are collections of key-value pairs (data).
+    - Installing MongoDB
+        - Can install locally or on a cloud service.
+- Mongoose
+    - Mongoose is an ODM library: Object Document Mapping library
+    - It provides an easier way to interact with a database.
+    - It makes queries, etc. for us.
+    - Uses schemas & models
+        - Schemas define how a type of data is structured. Such as a blog post always has a title, a snippet, and a body.
+        - Models define how an application communicates with a database.
+            - Has functions for carrying out operations to read, write, and perform other actions on the database.

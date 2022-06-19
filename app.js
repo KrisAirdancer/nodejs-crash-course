@@ -10,17 +10,24 @@
 
 const express = require('express');
 const morgan = require('morgan'); // A middleware package for logging
+const mongoose = require('mongoose');
+require('dotenv/config');
 
 // Setting up the Express app object
 const app = express(); // Initialize the Express app object. Not an instance of this file (app.js).
+
+// Connect to MongoDB
+// We only begin listening for incoming requests from the browser if we successfuly establish a connection with the database. If we haven't connected to the database, we won't be able to return any data to the browser, so there is no point in connecting.
+const dbURI = `mongodb+srv://KrisAirdancer:${process.env.MONGODB_ATLAS_PASSWORD}@nodejs-cluster.tp6w6.mongodb.net/?retryWrites=true&w=majority`;
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }) // This establishes a connection asynchronously to the database using the database connection string. The passed options are optional. We don't need them to establish a connection.
+    .then( (result) => { app.listen(3000) }) // When the Promise is returned, this callback is fired. It is not required to add this, but we can use it to confirm that a connection was established.
+    .catch( (err) => { console.log(err.message)}); // This function is for catching errors if they occur
+
 
 // Register view engine (specify that this is the view engine this project is using - you should only ever use one)
 app.set('view engine', 'ejs');
 // EJS looks in the views folder for its files by default. This is changing that from the default "views" to "myviews"
 // app.set('views', "myviews"); // We aren't changing the directory for EJS files.
-
-// Listen for incoming messages
-app.listen(3000); // Listen on port 3000. This returs an instance of the server so we could save it and work with it.
 
 // Middleware & Static Files
 app.use(express.static('public')); // This makes the directory 'public' and all of it's contents available to the frontend.
@@ -30,10 +37,9 @@ app.use(morgan('dev'));
 
 // Listen for GET requests for the root of the domain ('/').
 app.get('/', (req, res) => {
-
     const posts = [
         {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-        {title: 'Yoshi finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+        {title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur'},
         {title: 'How to defeat Bowser', snippet: 'Lorem ipsum dolor sit amet consectetur'},
     ];
 
