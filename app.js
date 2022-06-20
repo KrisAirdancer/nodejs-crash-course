@@ -11,6 +11,7 @@
 const express = require('express');
 const morgan = require('morgan'); // A middleware package for logging
 const mongoose = require('mongoose');
+const Post = require('./models/post')
 require('dotenv/config');
 
 // Setting up the Express app object
@@ -34,6 +35,16 @@ app.use(express.static('public')); // This makes the directory 'public' and all 
 
 // Setting up logging with morgan. This loggs information to the console.
 app.use(morgan('dev'));
+
+// Mongoose & MongoDB sandbox routes
+app.get('/add-post', (req, res) => {
+    // This creates a new instance of a Post object
+    const post = new Post({
+        title: 'New Post',
+        snippet: "About my new blog.",
+        body: "More about my new blog. And my cat!"
+    });
+});
 
 // Listen for GET requests for the root of the domain ('/').
 app.get('/', (req, res) => {
