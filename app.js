@@ -36,67 +36,27 @@ app.use(express.static('public')); // This makes the directory 'public' and all 
 // Setting up logging with morgan. This loggs information to the console.
 app.use(morgan('dev'));
 
-// Mongoose & MongoDB sandbox routes (the following calls (GET requests) are URLs that send and request data to/from the MongoDB database).
-
-// This function creates a new post and adds it to the MongoDB database.
-app.get('/add-post', (req, res) => {
-    // This creates a new instance of a Post object
-    const post = new Post({
-        title: 'New Post 2',
-        snippet: "About my new blog.",
-        body: "More about my new blog. And my cat!"
-    });
-
-    // This call saves the new post object to the MongoDB database. This is asynchronous and returns a Promise.
-    post.save()
-        .then( (result) => {
-            res.send(result); // This line sends the new post object (it's data) to the MongoDB database.
-        })
-        .catch( (err) => {
-            console.log(err.message);
-        })
-});
-
-// This function returns all of the posts saved in the MongoDB database.
-app.get('/all-posts', (req, res) => {
-    Post.find()
-        .then( (result) => {
-            res.send(result); // This sends the data (blog posts retrieved from the database) to the browser.
-        })
-        .catch( (err) => {
-            console.log(err.message);
-        })
-});
-
-app.get('/get-post', (req, res) => {
-    Post.findById('62b25c96ccda66a57e7677ae') // Mongoose handles the conversion of the Id from a string on our end to an ID object for use with MongoDB.
-        .then( (result) => {
-            res.send(result); // Sending the retrieved data to the browser
-        })
-        .catch( (err) => {
-            console.log(err.message);
-        })
-});
-
-
-
 // End MongoDB database functions
 
 // Listen for GET requests for the root of the domain ('/').
 app.get('/', (req, res) => {
-    const posts = [
-        {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-        {title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-        {title: 'How to defeat Bowser', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-    ];
-
-    // The second parameter makes the specified objects and variables available for use by EJS in the 'index' file.
-    // The syntax for variables is, <variable-name-in-ejs-file>: <variable-name-in-this-file>
-    res.render('index', { title: 'Home', posts: posts} ); // This renders (fills all variables, etc.) a view and sends it to the browser.
+    res.redirect('/all-posts'); // Redirects homepage traffic to the page displaying all of the blog posts.
 });
 
+// Builds the about page.
 app.get('/about', (req, res) => {
     res.render('about', { title: 'About'} );
+});
+
+// Builds a page that displays all of the blog posts on it.
+app.get('/all-posts', (req, res) => {
+    Post.find().sort({ createdAt: -1 }) // Sorts the returned data based on the time it was created (createdAt) in descending order (-1).
+        .then( (result) => {
+            res.render('index', { title: 'All Posts', posts: result }); // This sends the retrieved data to the browser. The "title" tag matches the HTML tag in head.ejs partial and therefore MUST include it. The "blogs" field is sending over the data itself (the data is stored in "result").
+        })
+        .catch( (err) => {
+            console.log(err.message);
+        })
 });
 
 app.get('/posts/create', (req, res) => {
