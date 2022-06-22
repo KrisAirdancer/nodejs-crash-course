@@ -58,3 +58,8 @@ My code from following The Net Ninja's YouTube tutorial on Node.js: https://www.
         - Schemas define how a type of data is structured. Such as a blog post always has a title, a snippet, and a body.
         - Models define how an application communicates with a database.
             - Has functions for carrying out operations to read, write, and perform other actions on the database.
+- Request Types for REST/CRUD
+    - **GET:** Requests to get a resource.
+    - **POST:** Requests to create new data (eg. a new blog post).
+    - **DELETE:** Requests to delete data (eg. remove a blog post).
+    - **PUT:** Requests to update data (eg. change a blog post).

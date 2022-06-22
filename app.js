@@ -30,6 +30,9 @@ app.set('view engine', 'ejs');
 // EJS looks in the views folder for its files by default. This is changing that from the default "views" to "myviews"
 // app.set('views', "myviews"); // We aren't changing the directory for EJS files.
 
+// Allows app.js to use functions that can parse URL encoded data.
+app.use(express.urlencoded({ exteneded: true }));
+
 // Middleware & Static Files
 app.use(express.static('public')); // This makes the directory 'public' and all of it's contents available to the frontend.
 
@@ -61,6 +64,20 @@ app.get('/all-posts', (req, res) => {
 
 app.get('/posts/create', (req, res) => {
     res.render('create', { title: 'Create'} );
+});
+
+// Sends a new blog post to the database.
+app.post('/all-posts', (req, res) => {
+    // req.body contains all of the information from the submitted new blog post form. But we can only parse the data as a string if we use the .urlencoded middleware.
+    const post = new Post(req.body); // This property (req.body) is made readable in app.js by the app.use(express.urlencoded()) call above.
+
+    post.save()
+        .then( (result) => {
+            res.redirect('/all-posts');
+        })
+        .catch( (err) => {
+            console.log(err.message);
+        })
 });
 
 // Handling invalid URLs by redirecting that request to the 404 page. If no match is found in any of the above functions, this function will fire. If a match is found above, this function will never run.
