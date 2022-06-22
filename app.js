@@ -19,7 +19,7 @@ const app = express(); // Initialize the Express app object. Not an instance of 
 
 // Connect to MongoDB
 // We only begin listening for incoming requests from the browser if we successfuly establish a connection with the database. If we haven't connected to the database, we won't be able to return any data to the browser, so there is no point in connecting.
-const dbURI = `mongodb+srv://${process.env.MONGODB_ATLAS_USER}:${process.env.MONGODB_ATLAS_PWD}@nodejs-cluster.tp6w6.mongodb.net/?retryWrites=true&w=majority`;
+const dbURI = `mongodb+srv://${process.env.MONGODB_ATLAS_USER}:${process.env.MONGODB_ATLAS_PWD}@nodejs-cluster.tp6w6.mongodb.net/nodejs-database?retryWrites=true&w=majority`;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true }) // This establishes a connection asynchronously to the database using the database connection string. The passed options are optional. We don't need them to establish a connection.
     .then( (result) => { app.listen(3000) }) // When the Promise is returned, this callback is fired. It is not required to add this, but we can use it to confirm that a connection was established.
     .catch( (err) => { console.log(err.message)}); // This function is for catching errors if they occur
@@ -36,15 +36,51 @@ app.use(express.static('public')); // This makes the directory 'public' and all 
 // Setting up logging with morgan. This loggs information to the console.
 app.use(morgan('dev'));
 
-// Mongoose & MongoDB sandbox routes
+// Mongoose & MongoDB sandbox routes (the following calls (GET requests) are URLs that send and request data to/from the MongoDB database).
+
+// This function creates a new post and adds it to the MongoDB database.
 app.get('/add-post', (req, res) => {
     // This creates a new instance of a Post object
     const post = new Post({
-        title: 'New Post',
+        title: 'New Post 2',
         snippet: "About my new blog.",
         body: "More about my new blog. And my cat!"
     });
+
+    // This call saves the new post object to the MongoDB database. This is asynchronous and returns a Promise.
+    post.save()
+        .then( (result) => {
+            res.send(result); // This line sends the new post object (it's data) to the MongoDB database.
+        })
+        .catch( (err) => {
+            console.log(err.message);
+        })
 });
+
+// This function returns all of the posts saved in the MongoDB database.
+app.get('/all-posts', (req, res) => {
+    Post.find()
+        .then( (result) => {
+            res.send(result); // This sends the data (blog posts retrieved from the database) to the browser.
+        })
+        .catch( (err) => {
+            console.log(err.message);
+        })
+});
+
+app.get('/get-post', (req, res) => {
+    Post.findById('62b25c96ccda66a57e7677ae') // Mongoose handles the conversion of the Id from a string on our end to an ID object for use with MongoDB.
+        .then( (result) => {
+            res.send(result); // Sending the retrieved data to the browser
+        })
+        .catch( (err) => {
+            console.log(err.message);
+        })
+});
+
+
+
+// End MongoDB database functions
 
 // Listen for GET requests for the root of the domain ('/').
 app.get('/', (req, res) => {
