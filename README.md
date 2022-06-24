@@ -63,3 +63,7 @@ My code from following The Net Ninja's YouTube tutorial on Node.js: https://www.
     - **POST:** Requests to create new data (eg. a new blog post).
     - **DELETE:** Requests to delete data (eg. remove a blog post).
     - **PUT:** Requests to update data (eg. change a blog post).
+- Route Parameters
+    - Route parameters are the parts of a route that can change
+    - eg. localhost:3000/posts/:id --- The :id is a variable
+    - eg. localhost:3000/posts/50 --- The 50 is a variable
