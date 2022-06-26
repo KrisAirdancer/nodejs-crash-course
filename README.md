@@ -4,12 +4,11 @@ My code from following The Net Ninja's YouTube tutorial [Node.js Crash Course](h
 
 99% of the code in this project was developed by The Net Ninja. I modified it slightly and added comments to help me learn from the tutorial videos.
 
+This project consists of a website backed by a Node.js server and a MongoDB database that stores the blog posts. The site is structured using the MVC model and uses Express.js for route handling. Database access credentials are stored in a local environment variables file to help improve security.
+
 ## Demonstration
 
 <img src="demo_content/NodeJS Project Demo.gif" alt="a gif recording of my project in use" width="100%">
-
-
-
 
 ## Setting up this project
 
