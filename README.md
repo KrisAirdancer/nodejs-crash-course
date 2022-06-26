@@ -67,3 +67,9 @@ My code from following The Net Ninja's YouTube tutorial on Node.js: https://www.
     - Route parameters are the parts of a route that can change
     - eg. localhost:3000/posts/:id --- The :id is a variable
     - eg. localhost:3000/posts/50 --- The 50 is a variable
+- Express Router
+    - The Express Router is a package that comes with Node.js.
+    - Express allows us to group routes into groups of related routes.
+        - eg. All of the '/posts/...' routes can be grouped so that there aren't a bunch of route calls in the app.js file itself. Instead, we only need one.
+    - This makes the code cleaner and easier to maintain and develop.
+    - It is good practice to organize the routes into a directory called routes. Wherein there are files that define the routes.

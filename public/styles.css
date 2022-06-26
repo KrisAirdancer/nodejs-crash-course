@@ -109,3 +109,13 @@
      font-size: 1.2em;
      cursor: pointer;
  }
+.class_netNinja_link:hover {
+    color: crimson;
+    text-decoration: underline;
+}
+nav h1:hover {
+    color: crimson;
+}
+li a:hover {
+    color: crimson;
+}

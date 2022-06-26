@@ -11,7 +11,7 @@
 const express = require('express');
 const morgan = require('morgan'); // A middleware package for logging
 const mongoose = require('mongoose');
-const Post = require('./models/post')
+const postsRoutes = require('./routes/postsRoutes') // Importing the router from the blogRoutes.js file.
 require('dotenv/config');
 
 // Setting up the Express app object
@@ -46,65 +46,15 @@ app.get('/', (req, res) => {
     res.redirect('/posts'); // Redirects homepage traffic to the page displaying all of the blog posts.
 });
 
+// /posts routes
+
+// The syntax for this can be .use(postsRoutes) or as below. If we use it as below, it only uses the routes in postsRoutes.js if the URL has /posts in it. As such, when we define the routes inside postsRoutes, we don't have to include /posts in front of every route in that file. Instead, in the postsRoutes.js file, we can just write the part of the route that comes after the /posts. eg. The route for /posts/:id would just be /:id in the postsRoutes.js file.
+app.use('/posts', postsRoutes); // This tells Node.js to apply all of the handlers that are defined in postsRoutes.js to the app.js object. This is equivalent to putting all of the code from postsRoutes.js right here. In fact, if you look at previous commits before Express was added, that is exactly what you will see.
+
 // Builds the about page.
 app.get('/about', (req, res) => {
     res.render('about', { title: 'About'} );
 });
-
-// Builds a page that displays all of the blog posts on it.
-app.get('/posts', (req, res) => {
-    Post.find().sort({ createdAt: -1 }) // Sorts the returned data based on the time it was created (createdAt) in descending order (-1).
-        .then( (result) => {
-            res.render('index', { title: 'All Posts', posts: result }); // This sends the retrieved data to the browser. The "title" tag matches the HTML tag in head.ejs partial and therefore MUST include it. The "blogs" field is sending over the data itself (the data is stored in "result").
-        })
-        .catch( (err) => {
-            console.log(err.message);
-        })
-});
-
-// Sends a new blog post to the database.
-app.post('/posts', (req, res) => {
-    // req.body contains all of the information from the submitted new blog post form. But we can only parse the data as a string if we use the .urlencoded middleware.
-    const post = new Post(req.body); // This property (req.body) is made readable in app.js by the app.use(express.urlencoded()) call above.
-
-    post.save()
-        .then( (result) => {
-            res.redirect('/posts');
-        })
-        .catch( (err) => {
-            console.log(err.message);
-        })
-});
-
-app.get('/posts/create', (req, res) => {
-    res.render('create', { title: 'Create'} );
-});
-
-// We must use the colon in front of the route parameter. If we don't, it will be interpreted as a string literal.
-app.get('/posts/:id', (req, res) => {
-    const id = req.params.id; // This gets the ID from the path that was generated in the browser by the JavaScript. I think. Something close to that. It definitely isn't accessing the database.
-    // console.log(id); // This just logs the id to the console to show that it is working.
-    Post.findById(id) // This retrieves the post associated with the ID from the database.
-        .then(result => {
-            res.render('details', { post: result, title: 'Post Details' }); // 'details' is the view (an file called details.ejs) that contains the HTML outline of the page.
-        })
-        .catch(err => {
-            console.log(err.message);
-        })
-});
-
-
-app.delete('/posts/:id', (req, res) => {
-    const id = req.params.id;
-    
-    Post.findByIdAndDelete(id)
-      .then(result => {
-        res.json({ redirect: '/posts' });
-      })
-      .catch(err => {
-        console.log(err.message);
-      });
-  });
 
 // Handling invalid URLs by redirecting that request to the 404 page. If no match is found in any of the above functions, this function will fire. If a match is found above, this function will never run.
 // This function does not take in a URL as a parameter b/c it fires for any request. This is why this one must be at the bottom of the file. It is the default case if all others don't match the incoming request. If you move this up in the code, it will cause other valid URLs to go to the 404 page.
