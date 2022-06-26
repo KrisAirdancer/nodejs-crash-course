@@ -3,7 +3,7 @@ My code from following The Net Ninja's YouTube tutorial [Node.js Crash Course](h
 
 99% of the code in this project was developed by The Net Ninja. I modified it slightly and added comments to help me learn from the tutorial videos.
 
-**Setting up this project**
+## Setting up this project
 
 - 1. Clone the repository to local.
 - 2. Run 'npm install' in the terminal to download all of the requried dependencies.
@@ -13,7 +13,7 @@ My code from following The Net Ninja's YouTube tutorial [Node.js Crash Course](h
     - 'node app' to run using vanilla Node.js
 
 
-**Notes**
+## Notes
 
 - The package-lock.json file keeps track of the different dependency versions for our project.
 - The package.json file keeps track of details regarding our project.
