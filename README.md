@@ -73,3 +73,10 @@ My code from following The Net Ninja's YouTube tutorial on Node.js: https://www.
         - eg. All of the '/posts/...' routes can be grouped so that there aren't a bunch of route calls in the app.js file itself. Instead, we only need one.
     - This makes the code cleaner and easier to maintain and develop.
     - It is good practice to organize the routes into a directory called routes. Wherein there are files that define the routes.
+- MVC
+    - Model View Controller.
+    - Models are how the data structures are defined (databases, etc.).
+    - Views are the HTML templaes and CSS.
+    - Controllers link the Model and View.
+        - These are the route handlers.
+        - Using MVC, we will pull the route handlers out of the code and put them into their own file.
