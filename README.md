@@ -1,5 +1,7 @@
 # nodejs-crash-course
-My code from following The Net Ninja's YouTube tutorial on Node.js: https://www.youtube.com/watch?v=zb3Qk8SG5Ms&amp;list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU&amp;index=1
+My code from following The Net Ninja's YouTube tutorial [Node.js Crash Course](https://www.youtube.com/watch?v=zb3Qk8SG5Ms&amp;list=PL4cUxeGkcC9jsz4LDYc6kv3ymONOKxwBU&amp;index=1). 
+
+99% of the code in this project was developed by The Net Ninja. I modified it slightly and added comments to help me learn from the tutorial videos.
 
 **Setting up this project**
 
