@@ -4,6 +4,13 @@ My code from following The Net Ninja's YouTube tutorial [Node.js Crash Course](h
 
 99% of the code in this project was developed by The Net Ninja. I modified it slightly and added comments to help me learn from the tutorial videos.
 
+## Demonstration
+
+<img src="demo_content/NodeJS Project Demo.gif" alt="a gif recording of my project in use" width="100%">
+
+
+
+
 ## Setting up this project
 
 - 1. Clone the repository to local.
