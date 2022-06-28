@@ -8,7 +8,7 @@ This project consists of a website backed by a Node.js server and a MongoDB data
 
 ## Demonstration
 
-<img src="demo_content/NodeJS Project Demo.gif" alt="a gif recording of my project in use" width="50%">
+<img src="demo_content/NodeJS Project Demo.gif" alt="a gif recording of my project in use" width="75%">
 
 ## Setting up this project
 
